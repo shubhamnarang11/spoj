@@ -1,0 +1,192 @@
+<div class="headingDiv">
+    <span class="headingSpan">
+    Test Your ARITHMETIC
+  </span>
+</div>
+
+<div id="container">
+    <div id="first">
+        <div *ngIf="!checkwhichQuizModifying('one') && !checkWhichQuizStarted('one')">
+            <div class="listItem instructionDiv">
+                Important Instructions:
+
+                <ol>
+                    <li class="listItem">
+                        There will be {{ noOfQuesQuiz1 }} Arithemtic questions on {{ arithmeticOperatorsQuiz1 }}.
+                    </li>
+                    <br />
+                    <li class="listItem">
+                        Questions will be asked one by one. After clicking on Next, User can not go back to previous questions.
+                    </li>
+                    <br />
+                    <li class="listItem">
+                        Users can change No. of Questions and Operators using the Modify Button.
+                    </li>
+                    <br />
+                    <li class="listItem">
+                        At the end of Test, you will be able to see the result.
+                    </li>
+                </ol>
+            </div>
+            <div class="buttonDiv">
+                <button class="modifyButton" (click)="modifyQuiz('one')">Modify</button
+        >&nbsp;&nbsp;
+        <button class="startButton" (click)="startQuiz1('one')">
+          Start Quiz
+        </button>
+            </div>
+        </div>
+        <div *ngIf="checkwhichQuizModifying('one')">
+            <div>
+                No. Of Questions:
+                <input matInput type="number" #question />
+                <br /> <br><br>Operators:
+                <select matNativeControl multiple [(ngModel)]="selectedOperatorsQuiz1" style="height: 100px">
+          <option *ngFor="let operator of allOperators" [value]="operator">{{
+            operator
+          }}</option>
+        </select>
+            </div>
+            <br><br>
+            <button class="modifyButton" (click)="modifyValuesQuiz1(question.value)">
+        Modify
+      </button>
+        </div>
+        <div *ngIf="checkWhichQuizStarted('one') && !finalPageQuiz1" class="quesDiv">
+            Q {{ count + 1 }} ). &nbsp;{{ quiz1Questions[count].operand1 }} {{ operatorSymbol[quiz1Questions[count].operator] }} {{ quiz1Questions[count].operand2 }} = ? <br />
+            <br />Ans. <br /><input matInput type="text" style="width: 200px;height: 20px;" [(ngModel)]="quiz1Questions[count].answer" />
+            <br /><br />
+            <button class="startButton" (click)="nextQuestionQuiz1()">
+        Next
+      </button>
+        </div>
+        <div *ngIf="finalPageQuiz1">
+            <table cellspacing="0" cellpadding="0" style="margin-left: 50px;">
+                <thead>
+                    <th class="columnHeading">Total No. of Questions</th>
+                    <th class="columnHeading">Correct Answers</th>
+                    <th class="columnHeading">Wrong Answers</th>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td class="columnData">{{ noOfQuesQuiz1 }}</td>
+                        <td class="columnData">{{ correctAnswersQuiz1 }}</td>
+                        <td class="columnData">{{ noOfQuesQuiz1 - correctAnswersQuiz1 }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br />
+            <hr />
+            <div>
+                <table cellspacing="0" cellpadding="0" style="margin-left: 50px;">
+                    <thead>
+                        <th class="columnHeading">Q. No.</th>
+                        <th class="columnHeading">Correct Answer</th>
+                        <th class="columnHeading">Your Answer</th>
+                    </thead>
+
+                    <tbody>
+                        <tr class="columnData" *ngFor="let quiz1Question of quiz1Questions; let i = index">
+                            <td class="columnData">{{ i + 1 }}</td>
+                            <td class="columnData">{{ quiz1Question.actualAnswer }}</td>
+                            <td class="columnData">{{ quiz1Question.answer }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="second">
+        <div *ngIf="!checkwhichQuizModifying('two') && !checkWhichQuizStarted('two')">
+            <div class="listItem instructionDiv">
+                Important Instructions:
+
+                <ol>
+                    <li class="listItem">
+                        There will be {{ noOfQuesQuiz2 }} Arithemtic questions on {{ arithmeticOperatorsQuiz2 }}.
+                    </li>
+                    <br />
+                    <li class="listItem">
+                        Questions will be asked one by one. After clicking on Next, User can not go back to previous questions.
+                    </li>
+                    <br />
+                    <li class="listItem">
+                        Users can change No. of Questions and Operators using the Modify Button.
+                    </li>
+                    <br />
+                    <li class="listItem">
+                        At the end of Test, you will be able to see the result.
+                    </li>
+                </ol>
+            </div>
+            <div class="buttonDiv">
+                <button class="modifyButton" (click)="modifyQuiz('two')">Modify</button
+        >&nbsp;&nbsp;
+        <button class="startButton" (click)="startQuiz2('two')">
+          Start Quiz
+        </button>
+            </div>
+        </div>
+        <div *ngIf="checkwhichQuizModifying('two')">
+            <div>
+                No. Of Questions:
+                <input matInput type="number" #question1 />
+                <br /><br> Operators:
+                <select matNativeControl multiple [(ngModel)]="selectedOperatorsQuiz2">
+          <option *ngFor="let operator of allOperators" [value]="operator">{{
+            operator
+          }}</option>
+        </select>
+            </div>
+            <br><br>
+            <button class="modifyButton" (click)="modifyValuesQuiz2(question1.value)">
+        Modify
+      </button>
+        </div>
+        <div *ngIf="checkWhichQuizStarted('two') && !finalPageQuiz2" class="quesDiv">
+            Q {{ count1 + 1 }} ). &nbsp;{{ quiz2Questions[count1].operand1 }} {{ operatorSymbol[quiz2Questions[count1].operator] }} {{ quiz2Questions[count1].operand2 }} = ? <br />
+            <br />Ans. <br /><input matInput type="text" style="width: 200px;height: 20px;;" [(ngModel)]="quiz2Questions[count1].answer" />
+            <br /><br />
+            <button class="startButton" (click)="nextQuestionQuiz2()">
+        Next
+      </button>
+        </div>
+        <div *ngIf="finalPageQuiz2">
+            <table cellspacing="0" cellpadding="0" style="margin-left: 50px;">
+                <thead>
+                    <th class="columnHeading">Total No. of Questions</th>
+                    <th class="columnHeading">Correct Answers</th>
+                    <th class="columnHeading">Wrong Answers</th>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td class="columnData">{{ noOfQuesQuiz2 }}</td>
+                        <td class="columnData">{{ correctAnswersQuiz2 }}</td>
+                        <td class="columnData">{{ noOfQuesQuiz2 - correctAnswersQuiz2 }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br />
+            <hr />
+            <div>
+                <table cellspacing="0" cellpadding="0" style="margin-left: 50px;">
+                    <thead>
+                        <th class="columnHeading">Q. No.</th>
+                        <th class="columnHeading">Correct Answer</th>
+                        <th class="columnHeading">Your Answer</th>
+                    </thead>
+
+                    <tbody>
+                        <tr class="columnData" *ngFor="let quiz2Question of quiz2Questions; let i = index">
+                            <td class="columnData">{{ i + 1 }}</td>
+                            <td class="columnData">{{ quiz2Question.actualAnswer }}</td>
+                            <td class="columnData">{{ quiz2Question.answer }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
